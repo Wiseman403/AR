@@ -1447,7 +1447,8 @@
 {
   "imports": {
     "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+    "mindar-face-three": "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-three.prod.js"
   }
 }
 </script>
@@ -3985,7 +3986,9 @@
                     updateBoot(CONFIG.app.boot.stages[1].msg);
                     const loadStart = performance.now();
                     try {
-                        await loadScript('https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-face-three.prod.js');
+                        const mindarModule = await import('mindar-face-three');
+                        window.MINDAR = window.MINDAR || {};
+                        window.MINDAR.FACE = mindarModule;
                         this.mindARLoaded = true;
                     } catch (e) {
                         warn('MindAR load failed, demo mode only:', e);
